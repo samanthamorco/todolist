@@ -5,10 +5,18 @@ class TodoItems extends Component {
     super(props, context);
 
     this.createTasks = this.createTasks.bind(this);
+    this.delete = this.delete.bind(this);
+  }
+  
+  delete(key) {
+    this.props.delete(key);
   }
 
   createTasks(item) {
-    return <li key={item.key}>{item.text}</li>
+    return <li key={item.key}
+               onClick={(e) => this.delete(item.key, e)}>
+               {item.text}
+           </li>
   }
 
   render() {
@@ -16,7 +24,7 @@ class TodoItems extends Component {
     var listItems = todoEntries.map(this.createTasks);
 
     return (
-      <ul className="thisList">
+      <ul className="theList">
         {listItems}
       </ul>
     )
